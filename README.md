@@ -1,3 +1,0 @@
-## Easepay
-
-## The problem we are trying to solve is the challenge of High Transactions Costs. Banking services have become expensive with high fees for transactions especially for the lower income population;   Potential solution 1. Create a blockchain based payment system that reduces transaction fee by cutting out intermediaries OR Design a microtransaction platform that lowers fees for small transactions by aggregating them
