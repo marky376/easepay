@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dropdown Navigation for Banking Transaction Solution">
+    <title>Transaction Solution - Navigation</title>
+
+    <!-- Styles -->
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Navigation Bar Styles */
+        .navbar {
+            background-color: #2c3e50;
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .navbar a:hover {
+            background-color: #34495e;
+            color: white;
+        }
+
+        /* Dropdown Container */
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+        /* Dropdown Button */
+        .dropdown .dropbtn {
+            font-size: 17px; 
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 20px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #34495e;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        /* Links Inside the Dropdown */
+        .dropdown-content a {
+            float: none;
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        /* Change color of dropdown links on hover */
+        .dropdown-content a:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Change color of the dropdown button on hover */
+        .dropdown:hover .dropbtn {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+
+        <!-- Dropdown Menu -->
+        <div class="dropdown">
+            <button class="dropbtn">More Pages 
+                <!-- Optional: Down arrow icon -->
+                &#9660;
+            </button>
+            <div class="dropdown-content">
+                <a href="solutions.html">Solutions</a>
+                <a href="team.html">Our Team</a>
+                <a href="faq.html">FAQ</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div style="padding: 20px;">
+        <h1>Welcome to the Transaction Cost Solution Website</h1>
+        <p>This is where the main content of your page will go.</p>
+    </div>
+
+</body>
+</html>
