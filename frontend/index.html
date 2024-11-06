@@ -29,7 +29,6 @@
                     </ul>
                 </li>
                 
-     
                 <!-- Invite Friends and Store Directory -->
                 <li><a href="#invite-friends">Invite Friends</a></li>
                 <li><a href="#store-directory">Store Directory</a></li>
@@ -52,18 +51,17 @@
 
     <main>
         <section id="home">
-            <section id="home">
-                <div id="greeting">
+            <div id="greeting">
                 <br>
-                </div>
-                <h2 id="user-greeting">Good Afternoon Mark</h2>
-            </section>
+            </div>
+            <h2 id="user-greeting">Good Afternoon Mark</h2>
             
             <div class="balance-section">
                 <h2>Account Balance</h2>
-                <div class="balance-amount">Ksh 50,250.00</div>
+                <div class="balance-amount" id="balance">Ksh 0.00</div>
                 <p>Available Balance</p>
-                <button>Add Money</button>
+                <button id="addMoneyButton">Add Money</button>
+                <button id="withdrawButton">Withdraw</button>
             </div>
 
             <div class="quick-links">
@@ -95,6 +93,81 @@
     <footer>
         <p>&copy; 2024 EasePay - Solving Kenya's banking transaction costs</p>
     </footer>
-    <script src="pay.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.3.6/dist/web3.min.js"></script>
+    <script>
+        const contractAddress = '0xA797b5997774AAeA1Ed0b22F90f8E6c37eacb0a9'; // Replace with your contract address
+        const abi = [
+        {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "balances",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "deposit",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function",
+      "payable": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdraw",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+        ];
+
+        const web3 = new Web3(Web3.givenProvider);
+        const bankContract = new web3.eth.Contract(abi, contractAddress);
+
+        document.getElementById('addMoneyButton').onclick = async () => {
+            const accounts = await web3.eth.requestAccounts();
+            const amount = web3.utils.toWei('1', 'ether'); // Example amount
+            await bankContract.methods.deposit().send({ from: accounts[0], value: amount });
+            updateBalance(accounts[0]);
+        };
+
+        document.getElementById('withdrawButton').onclick = async () => {
+            const accounts = await web3.eth.requestAccounts();
+            const amount = web3.utils.toWei('0.5', 'ether'); // Example amount
+            await bankContract.methods.withdraw(amount).send({ from: accounts[0] });
+            updateBalance(accounts[0]);
+        };
+
+        async function updateBalance(account) {
+            const balance = await bankContract.methods.balances(account).call();
+            document.getElementById('balance').innerText = 'Ksh ' + web3.utils.fromWei(balance, 'ether') + '.00';
+        }
+
+        // Initialize balance on page load
+        window.onload = async () => {
+            const accounts = await web3.eth.requestAccounts();
+            updateBalance(accounts[0]);
+        };
+    </script>
 </body>
 </html>
